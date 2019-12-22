@@ -45,7 +45,7 @@ class NovelHandler() {
      * 获得小说信息（铅笔小说网）
      */
     private fun getMessageFromQibi(): NovelMessage {
-        val document = Jsoup.connect(novelUrl).get()
+        val document = Jsoup.connect(novelUrl).timeout(5000).get()
         val div = document.getElementById("bookimg")
         val img = div.selectFirst("img")
 
@@ -71,7 +71,8 @@ class NovelHandler() {
      */
     private fun getContentFromQibi(chacterUrl: String): String {
         //获得章节标题和内容
-        val document = Jsoup.connect(chacterUrl).get()
+        //设置连接时长为5s
+        val document = Jsoup.connect(chacterUrl).timeout(5000).get()
         val mainTextDiv = document.selectFirst("#mlfy_main_text")
         val title = mainTextDiv.selectFirst("h1").text()//章节标题
 
