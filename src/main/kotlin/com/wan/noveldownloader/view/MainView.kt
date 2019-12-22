@@ -5,7 +5,7 @@ import kfoenix.jfxtabpane
 import tornadofx.*
 
 class MainView : View("星之小说下载器 by stars-one") {
-    
+
     override val root = hbox {
         val downloadedView = DownloadedView()
         setPrefSize(800.0, 500.0)

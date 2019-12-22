@@ -38,7 +38,7 @@ class AboutView : View("星之小说下载器 by stars-one") {
                             text("stars-one")
                         }
                         field("项目地址：") {
-                            hyperlink("www.baidu.com") {
+                            hyperlink("https://github.com/Stars-One/NovelDownloader-Kotlin") {
                                 setOnMouseClicked {
                                     Desktop.getDesktop().browse(URI(this.text.toString()))
                                 }
@@ -46,7 +46,7 @@ class AboutView : View("星之小说下载器 by stars-one") {
                         }
 
                         field("博客地址：") {
-                            hyperlink("www.cnblogs.com/kexing/noveldownloader") {
+                            hyperlink("www.cnblogs.com/kexing") {
                                 tooltip(this.text.toString())
                                 maxWidth = 300.0
                                 setOnMouseClicked {
@@ -58,7 +58,7 @@ class AboutView : View("星之小说下载器 by stars-one") {
                             text("1053894518")
                         }
                         field("软件交流群：") {
-                            text("124572245")
+                            text("690380139")
                         }
                     }
                     fieldset {
