@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+# Log file
+*.log
+
+# 忽略文件夹
+.idea/
+星之小说下载器/
+target/
+# Package Files #
+*.war
+
+
