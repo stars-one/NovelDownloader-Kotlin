@@ -120,7 +120,12 @@ class NovelDownloadTool(var url: String) {
     fun mergeFile(): DownloadedItem {
         //.表示当前路径
         val dir = File(File("."), "星之小说下载器").path
-        val file = File(dir, "${name.trim()}.txt")
+        val fileName = if (name.contains(":")){
+            name.replace(":","")+".txt"
+        }else{
+            "${name.trim()}.txt"
+        }
+        val file = File(dir, fileName)
         val bf = StringBuffer("")
         for (i in 0 until chacterMap.size) {
             val tempFile = File(dir, "$tempFileHead$i.txt")

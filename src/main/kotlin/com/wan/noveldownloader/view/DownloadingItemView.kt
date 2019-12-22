@@ -35,7 +35,7 @@ class DownloadingItemView() : Fragment() {
     var stopBtn: JFXButton by singleAssign()
     var downloadedView: DownloadedView? = null
     var url = ""
-
+    var isPause = false//暂停标志
     constructor(url: String, downloadedView: DownloadedView) : this() {
         this.url = url
         this.downloadedView = downloadedView
@@ -96,7 +96,13 @@ class DownloadingItemView() : Fragment() {
             pauseBtn = jfxbutton("暂停") {
                 setMinSize(JFXButton.USE_PREF_SIZE, JFXButton.USE_PREF_SIZE)
                 action {
-
+                    if (isPause) {
+                        this.text = "暂停"
+                    } else {
+                        this.text = "继续"
+                    }
+                    isPause = !isPause
+                    flagText.text = "已暂停"
                 }
             }
             stopBtn = jfxbutton("停止") {
@@ -135,7 +141,13 @@ class DownloadingItemView() : Fragment() {
                 for (i in 0 until step) {
                     val item = novelDownloadTool.downloadChacter(i)
                     runLater {
+                        if (isPause) {
+                            item.flag = "已暂停"
+                        }
                         updateUI(item)
+                    }
+                    while (isPause) {
+                        Thread.sleep(1000)
                     }
                 }
                 countDownLatch.countDown()
@@ -144,7 +156,13 @@ class DownloadingItemView() : Fragment() {
                 for (i in chacterMap.size - yu until chacterMap.size) {
                     val item = novelDownloadTool.downloadChacter(i)
                     runLater {
+                        if (isPause) {
+                            item.flag = "已暂停"
+                        }
                         updateUI(item)
+                    }
+                    while (isPause) {
+                        Thread.sleep(1000)
                     }
                 }
                 countDownLatch.countDown()
@@ -154,7 +172,13 @@ class DownloadingItemView() : Fragment() {
                     for (j in i * step until (i + 1) * step) {
                         val item = novelDownloadTool.downloadChacter(j)
                         runLater {
+                            if (isPause) {
+                                item.flag = "已暂停"
+                            }
                             updateUI(item)
+                        }
+                        while (isPause) {
+                            Thread.sleep(1000)
                         }
                     }
                     countDownLatch.countDown()
