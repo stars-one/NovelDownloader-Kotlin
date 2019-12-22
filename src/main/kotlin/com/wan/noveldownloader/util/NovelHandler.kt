@@ -1,18 +1,8 @@
 package com.wan.noveldownloader.util
 
-/**
- *
- * @author StarsOne
- * @date Create in  2019/10/15 0015 15:19
- * @description
- *
- */
-
-
 import com.wan.noveldownloader.model.NovelMessage
 import org.jsoup.Jsoup
 import kotlin.collections.set
-
 
 /**
  *
@@ -24,23 +14,28 @@ import kotlin.collections.set
 
 
 class NovelHandler() {
-    final val QIBI = "www.x23qb.com"
+    //todo 添加书源
+    val bookSourceMap = mapOf(
+            "铅笔小说网" to "www.x23qb.com"
+            )
+
+    val QIBI = "www.x23qb.com"
 
     private var novelUrl = ""
 
-    constructor(novelUrl: String) : this(){
+    constructor(novelUrl: String) : this() {
         this.novelUrl = novelUrl
     }
 
     fun getMessage(): NovelMessage? {
-        return when{
+        return when {
             novelUrl.contains(QIBI) -> getMessageFromQibi()
             else -> null
         }
     }
 
     fun getContent(chacterUrl: String): String {
-        return when{
+        return when {
             novelUrl.contains(QIBI) -> getContentFromQibi(chacterUrl)
             else -> ""
         }
@@ -49,7 +44,7 @@ class NovelHandler() {
     /**
      * 获得小说信息（铅笔小说网）
      */
-    private fun getMessageFromQibi(): NovelMessage{
+    private fun getMessageFromQibi(): NovelMessage {
         val document = Jsoup.connect(novelUrl).get()
         val div = document.getElementById("bookimg")
         val img = div.selectFirst("img")
@@ -68,7 +63,7 @@ class NovelHandler() {
         val end = novelUrl.lastIndexOf("/")
         val start = novelUrl.indexOf("k") + 2
         val tempFileHead = novelUrl.substring(start, end) + "_"
-        return NovelMessage(name,imgUrl,tempFileHead,chacterMap)
+        return NovelMessage(name, imgUrl, tempFileHead, chacterMap)
     }
 
     /**

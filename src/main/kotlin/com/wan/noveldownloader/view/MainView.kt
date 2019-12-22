@@ -21,15 +21,13 @@ class MainView : View("星之小说下载器 by stars-one") {
             tab("已下载") {
                 this += downloadedView
             }
-            tab("关于") {
-                vbox {
-                    text("helo tab3")
-                }
-            }
             tab("设置") {
                 hbox {
                     text("helo tab4")
                 }
+            }
+            tab("关于") {
+                this += AboutView()
             }
             tabMinWidth = 197.0
             for (tab in tabs) {
@@ -37,6 +35,7 @@ class MainView : View("星之小说下载器 by stars-one") {
             }
         }
     }
+
     fun downloadImage(imgUrl: String): URL {
         //jar包当前目录
         val dir = File(".", "星之小说下载器${File.separator}img")
